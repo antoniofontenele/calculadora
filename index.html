@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Aritmética</title>
+    <style>
+        /* Estilização Geral */
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .calculadora {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            width: 320px;
+        }
+
+        /* Visor */
+        #display {
+            width: 100%;
+            height: 60px;
+            background-color: #2d2d2d;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: right;
+            padding: 10px 15px;
+            font-size: 2rem;
+            color: #00ff88;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* Grade de Botões */
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 60px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #333;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        /* Botões Especiais */
+        .operador {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        .operador:hover {
+            background-color: #ffaa33;
+        }
+
+        .igual {
+            background-color: #00ff88;
+            color: #121212;
+            grid-column: span 2;
+        }
+
+        .igual:hover {
+            background-color: #33ffaa;
+        }
+
+        .limpar {
+            background-color: #ff3b30;
+            grid-column: span 2;
+        }
+
+        .limpar:hover {
+            background-color: #ff5e57;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <input type="text" id="display" disabled>
+
+        <div class="botoes">
+            <button class="limpar" onclick="limparVisor()">AC</button>
+            <button class="operador" onclick="adicionarAoVisor('/')">÷</button>
+            <button class="operador" onclick="adicionarAoVisor('*')">×</button>
+
+            <button onclick="adicionarAoVisor('7')">7</button>
+            <button onclick="adicionarAoVisor('8')">8</button>
+            <button onclick="adicionarAoVisor('9')">9</button>
+            <button class="operador" onclick="adicionarAoVisor('-')">-</button>
+
+            <button onclick="adicionarAoVisor('4')">4</button>
+            <button onclick="adicionarAoVisor('5')">5</button>
+            <button onclick="adicionarAoVisor('6')">6</button>
+            <button class="operador" onclick="adicionarAoVisor('+')">+</button>
+
+            <button onclick="adicionarAoVisor('1')">1</button>
+            <button onclick="adicionarAoVisor('2')">2</button>
+            <button onclick="adicionarAoVisor('3')">3</button>
+            <button onclick="adicionarAoVisor('.')">.</button>
+
+            <button onclick="adicionarAoVisor('0')">0</button>
+            <button class="igual" onclick="calcular()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function adicionarAoVisor(valor) {
+            display.value += valor;
+        }
+
+        function limparVisor() {
+            display.value = "";
+        }
+
+        function calcular() {
+            try {
+                // eval() processa a string aritmética como código real
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = "Erro";
+                setTimeout(limparVisor, 1500);
+            }
+        }
+    </script>
+
+</body>
+</html>
